@@ -5,8 +5,7 @@ use jrdb::Database;
 use jrdb::jrdb_type::{ JrCollection, JrString, JrDocument, AddGet };
 
 
-fn main() -> std::io::Result<()> {
-
+fn main(){
   //create file "main.db" if not exist
   let mut db:Database = Database::from("main");
 
@@ -29,7 +28,4 @@ fn main() -> std::io::Result<()> {
 
   //should print ILoveErd
   println!("{}",pass.get());
-
-  
-  Ok(())
 }
