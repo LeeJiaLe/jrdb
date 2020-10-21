@@ -7,8 +7,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08c48aae112d48ed9f069b33538ea9e3e90aa263cfa3d1c24309612b1f7472de"
 
 [[package]]
-name = "rust-jrdb"
-version = "0.0.1"
+name = "jrdb"
+version = "0.0.2"
 dependencies = [
  "byteorder",
 ]

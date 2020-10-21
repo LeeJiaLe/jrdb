@@ -1,8 +1,12 @@
 [package]
-name = "rust-jrdb"
-version = "0.0.1"
-authors = ["LeeJiaLe <36293056+LeeJiaLe@users.noreply.github.com>"]
+name = "jrdb"
+version = "0.0.2"
+license = "MIT OR Apache-2.0"
+authors = ["Deep Sea Lolicon <36293056+LeeJiaLe@users.noreply.github.com>"]
 edition = "2018"
+repository = "https://github.com/LeeJiaLe/jrdb"
+readme = "README.md"
+description = "Document oriented database created for learning purpose"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
