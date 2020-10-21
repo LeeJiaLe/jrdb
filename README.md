@@ -1,47 +1,67 @@
 # rust-jrdb
 Joel Rust Database, a document oriented NoSql database created for learning purpose
 
-Currently only support insert and select all function. Nested document/ collection not yet support.
+Currently support CRUD. Nested document/ collection and indexed collection not yet support.
 
 Example usage:
 ```rust
-mod jrdb;
-
-extern crate byteorder;
+use jrdb::jrdb_type::{AddGetValue, JrCollection, JrDocument};
 use jrdb::Database;
-use jrdb::jrdb_type::{ JrCollection, JrString, JrDocument, AddGet };
 
+use jrdb::{exp, jr_doc};
 
-fn main(){
+fn main() {
   //create file "main.db" if not exist
-  let mut db:Database = Database::from("main");
+  let mut db: Database = Database::from("main");
 
-  let mut doc:JrDocument = JrDocument::new();
-  doc.add("name", JrString::new("Joel".into()));
-  doc.add("pass", JrString::new("ILoveErd".into()));
+  //use macro to create JrDocument
+  let doc = jr_doc! {
+    "name"; String => "Mathew".into(),
+    "pass"; String => "ILoveERD".into(),
+    "age"; i64 => 400,
+  };
 
-  //create collection "user" if not exist
-  db.insert("user",&mut doc);
+  //basic way to create JrDocument
+  let mut doc2 = JrDocument::new();
+  doc2.add_value("name", String::from("Joel"));
+  doc2.add_value("pass", String::from("ILoveErd"));
+  doc2.add_value("age", 30);
 
-  let collection:JrCollection = db.select("user");
+  //create collection "users" and admin if not exist
+  db.insert("users", doc)
+    .insert("admins", doc2)
+    .execute();
 
-  let first_doc:&JrDocument = collection.get(0);
+  //update "users" with condition
+  db.update(
+    "users",
+    jr_doc! {
+      "name"; String => "Jason".into()
+    },
+  )
+  .condition(exp! {"name" ;== "'Joel'"})
+  .execute();
 
-  let name:&JrString = first_doc.get("name").unwrap();
-  let pass:&JrString = first_doc.get("pass").unwrap();
+  //select "users"
+  let collection: JrCollection = db.select("users").execute();
+  collection.print(0);
 
-  //should print Joel
-  println!("{}",name.get());
+  //select "admins"
+  let collection: JrCollection = db.select("admins").execute();
+  collection.print(0);
 
-  //should print ILoveErd
-  println!("{}",pass.get());
+  //delete with condition
+  db.delete("users")
+    .condition(exp! {"name" ;== "'Jason'"})
+    .execute();
+
+  let collection: JrCollection = db.select("users").execute();
+  collection.print(0);
 }
 
 ```
 
 ## Next Scope
 - Select specific key
-- Select with condition
-- "Update" feature
-- "Delete" feature
-- Create document (Maybe)
+- Fix spaghetti code
+- Create document
