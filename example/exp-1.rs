@@ -1,10 +1,3 @@
-# rust-jrdb
-Joel Rust Database, a document oriented NoSql database created for learning purpose
-
-Currently support CRUD. Nested document/ collection and indexed collection not yet support.
-
-Example usage:
-```rust
 use jrdb::jrdb_type::{AddGetValue, JrCollection, JrDocument};
 use jrdb::Database;
 
@@ -58,10 +51,3 @@ fn main() {
   let collection: JrCollection = db.select("users").execute();
   collection.print(0);
 }
-
-```
-
-## Next Scope
-- Select specific key
-- Fix spaghetti code
-- Create document
