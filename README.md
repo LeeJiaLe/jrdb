@@ -62,6 +62,6 @@ fn main() {
 ```
 
 ## Next Scope
-- Select specific key
+- Select data with specific key
 - Fix spaghetti code
-- Create document
+- Create documentation
