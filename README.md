@@ -1,4 +1,4 @@
-# rust-jrdb
+# jrdb
 Joel Rust Database, a document oriented NoSql database created for learning purpose
 
 Currently support CRUD. Nested document/ collection and indexed collection not yet support.
